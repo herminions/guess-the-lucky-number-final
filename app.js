@@ -1,3 +1,5 @@
+let usedNumbers = [];
+let maxNumber = 10
 let luckyNumber = generateLuckyNumber();
 let tries = 1;
 
@@ -14,7 +16,18 @@ function initialMessage(){
 initialMessage()
 
 function generateLuckyNumber(){
-    return parseInt(Math.random() * 100 + 1);
+    let generatedNumber = parseInt(Math.random() * maxNumber + 1);
+    let maxTries = usedNumbers.length
+    if(maxTries == maxNumber){
+        usedNumbers = []
+    }
+    if(usedNumbers.includes(generatedNumber)){
+        return generateLuckyNumber();
+    } else{
+        usedNumbers.push(generatedNumber);
+        console.log(usedNumbers)
+        return generatedNumber
+    }
 }
 
 function checkGuess(){
@@ -25,6 +38,7 @@ function checkGuess(){
             showText(`h1` , `You did it!`);
             showText(`p` , winMessage ) ;
             document.getElementById(`reiniciar`).removeAttribute("disabled");
+            document.getElementById(`chutar`).setAttribute("disabled" , true);
         }
         else{
             if(guess > luckyNumber){
@@ -47,6 +61,7 @@ function restartGame(){
     eraseInputField()
     initialMessage()
     document.getElementById(`reiniciar`).setAttribute("disabled" , true);
+    document.getElementById(`chutar`).removeAttribute("disabled");
 }
 function eraseInputField(){
     guess = document.querySelector(`input`);
