@@ -1,5 +1,5 @@
 let usedNumbers = [];
-let maxNumber = 10
+let maxNumber = 100
 let luckyNumber = generateLuckyNumber();
 let tries = 1;
 
